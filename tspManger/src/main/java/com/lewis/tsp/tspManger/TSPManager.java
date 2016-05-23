@@ -3,7 +3,6 @@ package com.lewis.tsp.tspManger;
 import com.alibaba.fastjson.JSON;
 import com.lewis.tsp.util.Base64Util;
 import com.lewis.tsp.vo.*;
-import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.methods.GetMethod;
