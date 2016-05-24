@@ -2,7 +2,7 @@ package com.lewis.tsp.vo;
 
 import java.util.List;
 
-public class AppSplitConfig {
+public class AppSplitConfigVo {
 
     //应用服务类型
     private ServiceType serviceType;
@@ -37,7 +37,7 @@ public class AppSplitConfig {
         this.tspNameList = tspNameList;
     }
 
-    public AppSplitConfig() {
+    public AppSplitConfigVo() {
     }
 
     public List<String> getForbiddenIpPortList() {
@@ -58,7 +58,7 @@ public class AppSplitConfig {
                 '}';
     }
 
-    public AppSplitConfig(ServiceType serviceType, List<String> allowIpPortList, List<String> forbiddenIpPortList, List<String> tspNameList) {
+    public AppSplitConfigVo(ServiceType serviceType, List<String> allowIpPortList, List<String> forbiddenIpPortList, List<String> tspNameList) {
         this.serviceType = serviceType;
         this.allowIpPortList = allowIpPortList;
         this.forbiddenIpPortList = forbiddenIpPortList;

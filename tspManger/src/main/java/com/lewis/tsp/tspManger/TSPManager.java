@@ -3,6 +3,7 @@ package com.lewis.tsp.tspManger;
 import com.alibaba.fastjson.JSON;
 import com.lewis.tsp.util.Base64Util;
 import com.lewis.tsp.vo.*;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.methods.GetMethod;
@@ -13,7 +14,6 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
-
 import java.io.IOException;
 import java.util.*;
 
@@ -24,10 +24,11 @@ public final class TSPManager {
 
     }
 
-    public static Map<String,List<TspProviderVo>> queryTspProviderInfo(GetTSPIPRequestVo requestVo) throws Exception{
-        if (requestVo == null || StringUtils.isEmpty(requestVo.getName())) {
+    public static QueryResultVo queryTspProviderInfo(String tspName) throws Exception{
+        if (StringUtils.isEmpty(tspName)) {
             throw new IllegalArgumentException("queryTspProviderInfo tspName cannot be empty");
         }
+        GetTSPIPRequestVo requestVo = new GetTSPIPRequestVo(tspName);
         Map<String,List<TspProviderVo>>  ip2tspProviderIpPortMap = new HashMap<String,List<TspProviderVo>>();
         try {
             HttpClient httpClient = new HttpClient();
@@ -39,12 +40,13 @@ public final class TSPManager {
             if (StringUtils.isNotEmpty(responseString)) {
                 responseString = Base64Util.decode(responseString);
                 ResponseVo responseVo = JSON.parseObject(responseString, ResponseVo.class);
-                classifyTspProviderInfoIntoMap(responseVo.getData(),ip2tspProviderIpPortMap,requestVo.getName());
+                QueryResultVo queryResultVo = classifyTspProviderInfoIntoMap(responseVo.getData(), requestVo.getName());
+                return queryResultVo;
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return ip2tspProviderIpPortMap;
+        return null;
     }
 
     public static void forbiddenOrPermitTsp(String tspName, String allowIpPort, TspOperation tspOperation) throws Exception{
@@ -120,26 +122,53 @@ public final class TSPManager {
         httpClient.getConnectionManager().shutdown();
     }
 
-    private static void classifyTspProviderInfoIntoMap(ResponseVo.ResponseDataVo data, Map<String, List<TspProviderVo>> ip2tspProviderIpMap,String tspName) {
+    private static QueryResultVo classifyTspProviderInfoIntoMap(ResponseVo.ResponseDataVo data, String tspName) {
         if (data != null && data.getCount() > 0) {
             List<TspProviderVo> allTspProviderVoList = data.getRows();
+            QueryResultVo queryResultVo = new QueryResultVo();
+            queryResultVo.setTspName(tspName);
+
+            SimpleAddressVo  permitAddresssVo = new SimpleAddressVo();
+            List<String> permitAddressList = new LinkedList<String>();
+            permitAddresssVo.setIpPortList(permitAddressList);
+            queryResultVo.setPermitAddress(permitAddresssVo);
+
+            SimpleAddressVo  forbiddenAddresssVo = new SimpleAddressVo();
+            List<String> forbiddenAddressList = new LinkedList<String>();
+            forbiddenAddresssVo.setIpPortList(forbiddenAddressList);
+            queryResultVo.setForbiddenAddresss(forbiddenAddresssVo);
+
             for (TspProviderVo tspProvider : allTspProviderVoList) {
-                String ip_port = tspProvider.getProviderAddress();
-                String ip = null;
-                if (StringUtils.isNotEmpty(ip_port)) {
-                    ip = ip_port.substring(0, ip_port.indexOf(":"));
-                    ip +="_"+tspName;
-                }
-                if (StringUtils.isNotEmpty(ip)) {
-                    List<TspProviderVo> tspProviderVoList = ip2tspProviderIpMap.get(ip);
-                    if (tspProviderVoList == null) {
-                        tspProviderVoList = new LinkedList<TspProviderVo>();
+
+                int ableFlag = tspProvider.getAbleFlag();
+                //启用
+                if (ableFlag == 0) {
+
+                    permitAddresssVo.setForbiddenOrPermit("已启用");
+                    if (!permitAddressList.contains(tspProvider.getProviderAddress())) {
+                        permitAddressList.add(tspProvider.getProviderAddress());
                     }
-                    tspProviderVoList.add(tspProvider);
-                    ip2tspProviderIpMap.put(ip,tspProviderVoList);
+
+                }else if (ableFlag == 1) {
+                    forbiddenAddresssVo.setForbiddenOrPermit("已禁用");
+                    if (!forbiddenAddressList.contains(tspProvider.getProviderAddress())) {
+                        forbiddenAddressList.add(tspProvider.getProviderAddress());
+                    }
                 }
+
             }
+            if (CollectionUtils.isNotEmpty(queryResultVo.getForbiddenAddresss().getIpPortList())) {
+                Comparator<String> ipPortComparator = new Comparator<String>() {
+                    public int compare(String o1, String o2) {
+                        return o1.compareTo(o2);
+                    }
+                };
+                Collections.sort(queryResultVo.getForbiddenAddresss().getIpPortList(), ipPortComparator);
+                Collections.sort(queryResultVo.getPermitAddress().getIpPortList(), ipPortComparator);
+            }
+            return queryResultVo;
         }
+        return  null;
     }
 
 

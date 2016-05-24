@@ -7,8 +7,8 @@ public enum ServiceType {
     PRICE(Constants.SERVICE_TPYE_PRICE),
     PRODUCT(Constants.SERVICE_TPYE_PRODUCT),
     RESOURCE(Constants.SERVICE_TPYE_RESOURCE),
-    VARNISH_TRANSMISSION(Constants.SERVICE_TPYE_VARNISH_TRANSMISSION);
-
+    VARNISH_TRANSMISSION(Constants.SERVICE_TPYE_VARNISH_TRANSMISSION),
+    ALL_SERVICE(Constants.SERVICE_TPYE_ALL_SERVICE);
     ServiceType(String serviceType) {
         this.serviceType = serviceType;
     }
