@@ -52,7 +52,7 @@ public final class TSPManager {
             if (StringUtils.isNotEmpty(responseString)) {
                 responseString = Base64Util.decode(responseString);
                 ResponseVo responseVo = JSON.parseObject(responseString, ResponseVo.class);
-                QueryResultVo queryResultVo = classifyTspProviderInfoIntoMap(responseVo.getData(), requestVo.getName());
+                QueryResultVo queryResultVo = createQueryResultVo(responseVo.getData(), requestVo.getName());
                 return queryResultVo;
             }
         } catch (IOException e) {
@@ -149,7 +149,7 @@ public final class TSPManager {
         httpClient.getConnectionManager().shutdown();
     }
 
-    private static QueryResultVo classifyTspProviderInfoIntoMap(ResponseVo.ResponseDataVo data, String tspName) {
+    private static QueryResultVo createQueryResultVo(ResponseVo.ResponseDataVo data, String tspName) {
         if (data != null && data.getCount() > 0) {
             List<TspProviderVo> allTspProviderVoList = data.getRows();
             QueryResultVo queryResultVo = new QueryResultVo();
