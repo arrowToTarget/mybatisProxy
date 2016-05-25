@@ -2,6 +2,7 @@ package com.lewis.tsp.tspManger;
 
 import com.alibaba.fastjson.JSON;
 import com.lewis.tsp.util.Base64Util;
+import com.lewis.tsp.util.CommonUtil;
 import com.lewis.tsp.vo.*;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.httpclient.HttpClient;
@@ -14,7 +15,11 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
+
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.*;
 
 
@@ -29,14 +34,21 @@ public final class TSPManager {
             throw new IllegalArgumentException("queryTspProviderInfo tspName cannot be empty");
         }
         GetTSPIPRequestVo requestVo = new GetTSPIPRequestVo(tspName);
-        Map<String,List<TspProviderVo>>  ip2tspProviderIpPortMap = new HashMap<String,List<TspProviderVo>>();
         try {
             HttpClient httpClient = new HttpClient();
             String url = Constants.URL_GET_TSP_IP_LIST+"?"+ Base64Util.encode(JSON.toJSONString(requestVo));
             HttpMethod httpMethod = new GetMethod(url);
             httpMethod.releaseConnection();
             httpClient.executeMethod(httpMethod);
-            String responseString = httpMethod.getResponseBodyAsString();
+            InputStream is = httpMethod.getResponseBodyAsStream();
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+            StringBuilder sb = new StringBuilder();
+            String readLine = null;
+            while ((readLine = br.readLine())!= null){
+                sb.append(readLine);
+            }
+            //String responseString = httpMethod.getResponseBodyAsString();
+            String responseString = sb.toString();
             if (StringUtils.isNotEmpty(responseString)) {
                 responseString = Base64Util.decode(responseString);
                 ResponseVo responseVo = JSON.parseObject(responseString, ResponseVo.class);
@@ -47,6 +59,21 @@ public final class TSPManager {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static List<QueryResultVo> queryTspProviderInfoByServiceType(ServiceType serviceType){
+        List<QueryResultVo> retList = new LinkedList<QueryResultVo>();
+        List<String> tspNameList = CommonUtil.getTspNameListByServiceType(serviceType);
+        try {
+            if (CollectionUtils.isNotEmpty(tspNameList)) {
+                for (String tspName : tspNameList) {
+                    retList.add(queryTspProviderInfo(tspName));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return retList;
     }
 
     public static void forbiddenOrPermitTsp(String tspName, String allowIpPort, TspOperation tspOperation) throws Exception{
@@ -135,7 +162,7 @@ public final class TSPManager {
 
             SimpleAddressVo  forbiddenAddresssVo = new SimpleAddressVo();
             List<String> forbiddenAddressList = new LinkedList<String>();
-            forbiddenAddresssVo.setIpPortList(forbiddenAddressList);
+
             queryResultVo.setForbiddenAddresss(forbiddenAddresssVo);
 
             for (TspProviderVo tspProvider : allTspProviderVoList) {
@@ -157,13 +184,18 @@ public final class TSPManager {
                 }
 
             }
+            if (CollectionUtils.isNotEmpty(forbiddenAddressList)) {
+                forbiddenAddresssVo.setIpPortList(forbiddenAddressList);
+            }
+            Comparator<String> ipPortComparator = new Comparator<String>() {
+                public int compare(String o1, String o2) {
+                    return o1.compareTo(o2);
+                }
+            };
             if (CollectionUtils.isNotEmpty(queryResultVo.getForbiddenAddresss().getIpPortList())) {
-                Comparator<String> ipPortComparator = new Comparator<String>() {
-                    public int compare(String o1, String o2) {
-                        return o1.compareTo(o2);
-                    }
-                };
                 Collections.sort(queryResultVo.getForbiddenAddresss().getIpPortList(), ipPortComparator);
+            }
+            if (CollectionUtils.isNotEmpty(queryResultVo.getPermitAddress().getIpPortList())) {
                 Collections.sort(queryResultVo.getPermitAddress().getIpPortList(), ipPortComparator);
             }
             return queryResultVo;

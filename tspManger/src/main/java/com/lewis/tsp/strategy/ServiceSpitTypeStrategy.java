@@ -6,6 +6,7 @@ import com.lewis.tsp.vo.config.ServiceConfig;
 
 /**
  * Created by zhangminghua on 2016/5/24.
+ * 按照服务拆分的策略
  */
 public class ServiceSpitTypeStrategy implements PermitForbiddenStrtegy {
 

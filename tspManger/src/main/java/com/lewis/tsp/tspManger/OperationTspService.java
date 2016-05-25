@@ -11,12 +11,12 @@ import java.util.List;
  */
 public final class OperationTspService {
 
-    //禁用价格服务
+    //禁用服务
     public static void forbiddenTspService(AppSplitConfigVo appSplitConfigVo){
         doForbiddenTspService(appSplitConfigVo);
     }
 
-    //启用价格服务
+    //启用服务
     public static void permitTspService(AppSplitConfigVo appSplitConfigVo){
         doPermitTspService(appSplitConfigVo);
     }

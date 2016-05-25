@@ -8,6 +8,7 @@ import java.util.List;
 
 /**
  * Created by zhangminghua on 2016/5/24.
+ * 单个Tsp 多个实例的策略
  */
 public class SingleTspMultiIpPortStrategy implements PermitForbiddenStrtegy {
 

@@ -1,7 +1,7 @@
 package com.lewis.tsp.vo.config;
 
 import com.alibaba.fastjson.JSON;
-import com.lewis.tsp.vo.CommonUtil;
+import com.lewis.tsp.util.CommonUtil;
 
 import java.util.*;
 

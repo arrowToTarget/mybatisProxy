@@ -5,6 +5,9 @@ import com.lewis.tsp.tspManger.TSPManager;
 import com.lewis.tsp.vo.TspOperation;
 import org.apache.commons.lang3.StringUtils;
 
+/**
+ * 单个Tsp 单个实例的策略
+ */
 public class SingleTspSingleIpPortStrategy implements PermitForbiddenStrtegy {
 
     private String tspName;

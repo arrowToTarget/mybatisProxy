@@ -1,5 +1,8 @@
-package com.lewis.tsp.vo;
+package com.lewis.tsp.util;
 
+import com.lewis.tsp.vo.ServiceType;
+import com.lewis.tsp.vo.config.IpPortConfig;
+import com.lewis.tsp.vo.config.TSPNameConfig;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -50,4 +53,23 @@ public final class CommonUtil {
         }
         return ipPortList;
     }
+
+    public static List<String> getTspNameListByServiceType(ServiceType serviceType){
+        List<String> tspNameList = null;
+        if (serviceType != null) {
+            if (serviceType == ServiceType.PRICE) {
+                tspNameList = TSPNameConfig.getPriceTspNameList();
+            }else if (serviceType == ServiceType.PRODUCT) {
+                tspNameList = TSPNameConfig.getProductTspNameList();
+            }else if (serviceType == ServiceType.RESOURCE) {
+                tspNameList = TSPNameConfig.getResourceTspNameList();
+            }else if (serviceType == ServiceType.VARNISH_TRANSMISSION) {
+                tspNameList = TSPNameConfig.getUnVarnishTransmissionTspNameList();
+            }else if (serviceType == ServiceType.ALL_SERVICE) {
+                tspNameList = TSPNameConfig.getAllServiceTspNameList();
+            }
+        }
+        return tspNameList;
+    }
+
 }
