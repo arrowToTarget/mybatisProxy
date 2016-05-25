@@ -1,6 +1,9 @@
 package com.lewis.tsp.strategy.factory;
 
 import com.lewis.tsp.strategy.*;
+import com.lewis.tsp.strategy.forbidden.ServiceSpitTypeStrategy;
+import com.lewis.tsp.strategy.forbidden.SingleTspMultiIpPortStrategy;
+import com.lewis.tsp.strategy.forbidden.SingleTspSingleIpPortStrategy;
 import com.lewis.tsp.strategy.recover.AllServiceRecoverStrategy;
 import com.lewis.tsp.strategy.recover.ServiceSplitTypeRecoverStrategy;
 import com.lewis.tsp.strategy.recover.SingleTspRecoverStrategy;

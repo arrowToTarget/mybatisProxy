@@ -1,6 +1,6 @@
-package com.lewis.tsp.strategy;
+package com.lewis.tsp.strategy.forbidden;
 
-import com.lewis.tsp.tspManger.OperationTspService;
+import com.lewis.tsp.strategy.PermitForbiddenStrtegy;
 import com.lewis.tsp.vo.ServiceType;
 import com.lewis.tsp.vo.config.ServiceConfig;
 

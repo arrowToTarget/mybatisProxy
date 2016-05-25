@@ -1,7 +1,7 @@
 package com.lewis.tsp.strategy.recover;
 
 import com.lewis.tsp.strategy.PermitStrategy;
-import com.lewis.tsp.tspManger.OperationTspService;
+import com.lewis.tsp.strategy.forbidden.OperationTspService;
 import com.lewis.tsp.vo.AppSplitConfigVo;
 import com.lewis.tsp.vo.config.ServiceConfig;
 

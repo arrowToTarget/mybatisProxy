@@ -1,6 +1,7 @@
-package com.lewis.tsp.strategy;
+package com.lewis.tsp.strategy.forbidden;
 
 
+import com.lewis.tsp.strategy.PermitForbiddenStrtegy;
 import com.lewis.tsp.tspManger.TSPManager;
 import com.lewis.tsp.vo.TspOperation;
 import org.apache.commons.lang3.StringUtils;
