@@ -5,6 +5,6 @@ package com.lewis.tsp.strategy;
  */
 public interface ForbiddenStrategy {
 
-    void forbidden();
+    void forbidden() throws Exception;
 
 }

@@ -11,7 +11,7 @@ public class Client {
 
     public static void main(String[] args) {
         //单个tsp服务的查询
-        String tspName ="BOH.NM.ProductController.baokuanProduct";
+      /*  String tspName ="BOH.NM.ProductController.baokuanProduct";
         System.out.println(JSON.toJSONString(QuerySingleTspStrategy.querySingleTsp(tspName)));
         System.out.println("====================");
         //按照tsp服务类型的查询
@@ -25,8 +25,11 @@ public class Client {
         System.out.println(JSON.toJSONString(QueryServiceTypeTspStrategy.queryUnVarnishTransmissionServiceTypeTsp()));
         //查询所有服务的tsp信息
         System.out.println(JSON.toJSONString(QueryServiceTypeTspStrategy.queryAllServiceTypeTsp()));
+*/
 
 
     }
+
+
 
 }

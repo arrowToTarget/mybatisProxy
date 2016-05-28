@@ -1,13 +1,14 @@
 package com.lewis.tsp.strategy.factory;
 
 import com.lewis.tsp.strategy.*;
-import com.lewis.tsp.strategy.forbidden.ServiceSpitTypeStrategy;
-import com.lewis.tsp.strategy.forbidden.SingleTspMultiIpPortStrategy;
-import com.lewis.tsp.strategy.forbidden.SingleTspSingleIpPortStrategy;
+import com.lewis.tsp.strategy.forbidden.*;
 import com.lewis.tsp.strategy.recover.AllServiceRecoverStrategy;
 import com.lewis.tsp.strategy.recover.ServiceSplitTypeRecoverStrategy;
 import com.lewis.tsp.strategy.recover.SingleTspRecoverStrategy;
 import com.lewis.tsp.vo.ServiceType;
+import com.lewis.tsp.vo.config.IPEnum;
+import com.lewis.tsp.vo.config.IPPortEnum;
+
 import java.util.List;
 
 /**
@@ -41,6 +42,14 @@ public final class StrategyFactory {
 
     public static PermitStrategy createServiceSplitTypeRecoverStrategy(ServiceType serviceType){
         return new ServiceSplitTypeRecoverStrategy(serviceType);
+    }
+
+    public static PermitForbiddenStrtegy createSingleIpAllServiceStrategy(IPEnum ipEnum){
+        return new SimpleIpAllServiceStrategy(ipEnum);
+    }
+
+    public static PermitForbiddenStrtegy createSingleIpPortAllServiceStrategy(IPPortEnum ipPortEnum){
+        return new SimpleIpPortAllServiceStrtegy(ipPortEnum);
     }
 
 
