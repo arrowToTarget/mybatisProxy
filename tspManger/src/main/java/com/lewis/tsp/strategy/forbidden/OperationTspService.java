@@ -25,14 +25,14 @@ public final class OperationTspService {
     private static void doForbiddenTspService(AppSplitConfigVo appSplitConfig) {
         try {
             if (appSplitConfig != null) {
-                List<String> forbiddenIpPortList = appSplitConfig.getForbiddenIpPortList();
-                List<String> tspNameList = appSplitConfig.getTspNameList();
+                List<String> allowIpPortList = appSplitConfig.getAllowIpPortList();
+                List<String> tspNameList = appSplitConfig.getForbiddenTspNameList();
                 if (CollectionUtils.isNotEmpty(tspNameList)) {
-                    if (CollectionUtils.isNotEmpty(forbiddenIpPortList)) {
-                        TSPManager.forbiddenOrPermitTspOfBatch(tspNameList, forbiddenIpPortList, TspOperation.FORBIDDEN);
+                    if (CollectionUtils.isNotEmpty(allowIpPortList)) {
+                        TSPManager.forbiddenOrPermitTspOfBatch(tspNameList, allowIpPortList, TspOperation.FORBIDDEN);
                     }
                 }
-                System.out.println("禁用 tspName "+ JSON.toJSONString(tspNameList)+" 在实例 "+JSON.toJSONString(forbiddenIpPortList)+" 成功！");
+                System.out.println("禁用 tspName "+ JSON.toJSONString(tspNameList)+" 在实例 "+JSON.toJSONString(allowIpPortList)+" 成功！");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -43,7 +43,7 @@ public final class OperationTspService {
         try {
             if (appSplitConfig != null) {
                 List<String> allowIpPortList = appSplitConfig.getAllowIpPortList();
-                List<String> tspNameList = appSplitConfig.getTspNameList();
+                List<String> tspNameList = appSplitConfig.getAllowTspNameList();
                 if (CollectionUtils.isNotEmpty(tspNameList)) {
                     if (CollectionUtils.isNotEmpty(allowIpPortList)) {
                         TSPManager.forbiddenOrPermitTspOfBatch(tspNameList, allowIpPortList, TspOperation.PERMISSION);

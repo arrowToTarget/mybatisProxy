@@ -1,5 +1,7 @@
 package com.lewis.tsp.vo.config;
 
+import com.lewis.tsp.util.CommonUtil;
+
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -8,7 +10,7 @@ import java.util.List;
 public class TSPNameConfig {
 
     //14个价格服务
-    public static final List<String> priceTspNameList
+    public static final List<String> priceAllowTspNameList
             = Arrays.asList(
             "BOH.NM.ProductController.getPriceCalendar","BOH.NM.ProductController.queryProductStartPrice",
             "BOH.NM.ProductController.queryProductPromotionInfo","BOH.NM.ProductController.queryDepartureCityInfoWithPrice",
@@ -19,7 +21,7 @@ public class TSPNameConfig {
             "BOH.NM.ProductController.getCombinationCalendar","BOH.NM.NgResourceController.queryResCalendar");
 
     //30个产品服务
-    public static final List<String> productTspNameList
+    public static final List<String> productAllowTspNameList
             = Arrays.asList(
             "BOH.NM.ProductController.getDetail","BOH.NM.ProductController.queryCommonProductInfos",
             "BOH.NM.ProductController.queryProductInstallment","BOH.NM.ProductController.getProductType",
@@ -38,7 +40,7 @@ public class TSPNameConfig {
             "BOH.NM.CityQueryControler.getCities","BOH.NM.HotelGroupController.getHotelGroupHotList");
 
     //9个资源服务
-    public static final List<String> resourceTspNameList
+    public static final List<String> resourceAllowTspNameList
             = Arrays.asList(
             "BOH.NM.NgResourceController.getByResIds","BOH.NM.ProductController.getDetailResources",
             "BOH.NM.FlightTicketChannelController.queryAirportCity","BOH.NM.TrainTicketChannelController.getCities",
@@ -47,7 +49,7 @@ public class TSPNameConfig {
             "BOH.NM.NgResourceController.queryResList");
 
     //34个透传服务
-    public static final List<String> unVarnishTransmissionTspNameList
+    public static final List<String> unVarnishAllowTransmissionTspNameList
             = Arrays.asList(
             "BOH.NM.FlightTicketChannelController.queryFlightIndivPriceCalendar","BOH.NM.NgResourceController.queryResourceRelation",
             "BOH.NM.FlightTicketChannelController.queryFlightIndivRecommended","BOH.NM.FlightTicketChannelController.queryHotCity",
@@ -69,30 +71,71 @@ public class TSPNameConfig {
 
     public static final List<String> allServiceTspNameList = new LinkedList<String>();
 
+    public static final List<String> priceForbiddenTspNameList = new LinkedList<String>();
+    public static final List<String> productForbiddenTspNameList = new LinkedList<String>();
+    public static final List<String> resourceForbiddenTspNameList = new LinkedList<String>();
+    public static final List<String> unVarnishTransmissionForbiddenTspNameList = new LinkedList<String>();
+
     static {
-        allServiceTspNameList.addAll(priceTspNameList);
-        allServiceTspNameList.addAll(productTspNameList);
-        allServiceTspNameList.addAll(resourceTspNameList);
-        allServiceTspNameList.addAll(unVarnishTransmissionTspNameList);
+        allServiceTspNameList.addAll(priceAllowTspNameList);
+        allServiceTspNameList.addAll(productAllowTspNameList);
+        allServiceTspNameList.addAll(resourceAllowTspNameList);
+        allServiceTspNameList.addAll(unVarnishAllowTransmissionTspNameList);
+
+        List<String> tmpAllServiceTspNameList = new LinkedList<String>();
+        CommonUtil.copyCollection(allServiceTspNameList,tmpAllServiceTspNameList);
+        tmpAllServiceTspNameList.removeAll(priceAllowTspNameList);
+        priceForbiddenTspNameList.addAll(tmpAllServiceTspNameList);
+
+        tmpAllServiceTspNameList.clear();
+        CommonUtil.copyCollection(allServiceTspNameList,tmpAllServiceTspNameList);
+        tmpAllServiceTspNameList.removeAll(productAllowTspNameList);
+        productForbiddenTspNameList.addAll(tmpAllServiceTspNameList);
+
+        tmpAllServiceTspNameList.clear();
+        CommonUtil.copyCollection(allServiceTspNameList,tmpAllServiceTspNameList);
+        tmpAllServiceTspNameList.removeAll(resourceAllowTspNameList);
+        resourceForbiddenTspNameList.addAll(tmpAllServiceTspNameList);
+
+        tmpAllServiceTspNameList.clear();
+        CommonUtil.copyCollection(allServiceTspNameList,tmpAllServiceTspNameList);
+        tmpAllServiceTspNameList.removeAll(unVarnishAllowTransmissionTspNameList);
+        unVarnishTransmissionForbiddenTspNameList.addAll(tmpAllServiceTspNameList);
     }
 
-    public static List<String> getPriceTspNameList() {
-        return priceTspNameList;
+    public static List<String> getPriceAllowTspNameList() {
+        return priceAllowTspNameList;
     }
 
-    public static List<String> getProductTspNameList() {
-        return productTspNameList;
+    public static List<String> getProductAllowTspNameList() {
+        return productAllowTspNameList;
     }
 
-    public static List<String> getResourceTspNameList() {
-        return resourceTspNameList;
+    public static List<String> getResourceAllowTspNameList() {
+        return resourceAllowTspNameList;
     }
 
-    public static List<String> getUnVarnishTransmissionTspNameList() {
-        return unVarnishTransmissionTspNameList;
+    public static List<String> getUnVarnishAllowTransmissionTspNameList() {
+        return unVarnishAllowTransmissionTspNameList;
     }
 
     public static List<String> getAllServiceTspNameList() {
         return allServiceTspNameList;
+    }
+
+    public static List<String> getPriceForbiddenTspNameList() {
+        return priceForbiddenTspNameList;
+    }
+
+    public static List<String> getProductForbiddenTspNameList() {
+        return productForbiddenTspNameList;
+    }
+
+    public static List<String> getResourceForbiddenTspNameList() {
+        return resourceForbiddenTspNameList;
+    }
+
+    public static List<String> getUnVarnishTransmissionForbiddenTspNameList() {
+        return unVarnishTransmissionForbiddenTspNameList;
     }
 }

@@ -15,4 +15,8 @@ public class AllServiceRecoverStrategy implements PermitStrategy {
         AppSplitConfigVo allServiceRecoverAppSplitConfig = ServiceConfig.getAllServiceRecoverAppSplitConfig();
         OperationTspService.permitTspService(allServiceRecoverAppSplitConfig);
     }
+
+    public static void main(String[] args) {
+        new AllServiceRecoverStrategy().permit();
+    }
 }

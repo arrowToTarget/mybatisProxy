@@ -33,48 +33,53 @@ public class ServiceConfig {
         priceAppSplitConfig.setServiceType(ServiceType.PRICE);
         priceAppSplitConfig.setAllowIpPortList(IpPortConfig.getPriceAllowedIpPortList());
         priceAppSplitConfig.setForbiddenIpPortList(IpPortConfig.getPriceForbiddenIpPortList());
-        priceAppSplitConfig.setTspNameList(TSPNameConfig.getPriceTspNameList());
+        priceAppSplitConfig.setAllowTspNameList(TSPNameConfig.getPriceAllowTspNameList());
+        priceAppSplitConfig.setForbiddenTspNameList(TSPNameConfig.getPriceForbiddenTspNameList());
+
         //价格服务的恢复性配置 设置
         priceRecoverAppSplitConfig.setServiceType(ServiceType.PRICE);
         priceRecoverAppSplitConfig.setAllowIpPortList(IpPortConfig.getAllIpPortList());
         priceRecoverAppSplitConfig.setForbiddenIpPortList(null);
-        priceRecoverAppSplitConfig.setTspNameList(TSPNameConfig.getPriceTspNameList());
+        priceRecoverAppSplitConfig.setAllowTspNameList(TSPNameConfig.getPriceAllowTspNameList());
 
         productAppSplitConfig.setServiceType(ServiceType.PRODUCT);
         productAppSplitConfig.setAllowIpPortList(IpPortConfig.getProductAllowedIpPortList());
         productAppSplitConfig.setForbiddenIpPortList(IpPortConfig.getProductForbiddenIpPortList());
-        productAppSplitConfig.setTspNameList(TSPNameConfig.getProductTspNameList());
+        productAppSplitConfig.setAllowTspNameList(TSPNameConfig.getProductAllowTspNameList());
+        productAppSplitConfig.setForbiddenTspNameList(TSPNameConfig.getProductForbiddenTspNameList());
         //产品服务的恢复性配置 设置
         productRecoverAppSplitConfig.setServiceType(ServiceType.PRODUCT);
         productRecoverAppSplitConfig.setAllowIpPortList(IpPortConfig.getAllIpPortList());
         productRecoverAppSplitConfig.setForbiddenIpPortList(null);
-        productRecoverAppSplitConfig.setTspNameList(TSPNameConfig.getProductTspNameList());
+        productRecoverAppSplitConfig.setAllowTspNameList(TSPNameConfig.getProductAllowTspNameList());
 
         resourceAppSplitConfig.setServiceType(ServiceType.RESOURCE);
         resourceAppSplitConfig.setAllowIpPortList(IpPortConfig.getResourceAllowedIpPortList());
         resourceAppSplitConfig.setForbiddenIpPortList(IpPortConfig.getResourceForbiddenIpPortList());
-        resourceAppSplitConfig.setTspNameList(TSPNameConfig.getResourceTspNameList());
+        resourceAppSplitConfig.setAllowTspNameList(TSPNameConfig.getResourceAllowTspNameList());
+        resourceAppSplitConfig.setForbiddenTspNameList(TSPNameConfig.getResourceForbiddenTspNameList());
         //资源服务的恢复性配置 设置
         resourceRecoverAppSplitConfig.setServiceType(ServiceType.RESOURCE);
         resourceRecoverAppSplitConfig.setAllowIpPortList(IpPortConfig.getAllIpPortList());
         resourceRecoverAppSplitConfig.setForbiddenIpPortList(null);
-        resourceRecoverAppSplitConfig.setTspNameList(TSPNameConfig.getResourceTspNameList());
+        resourceRecoverAppSplitConfig.setAllowTspNameList(TSPNameConfig.getResourceAllowTspNameList());
 
         unVarnishTransmissionAppSplitConfig.setServiceType(ServiceType.VARNISH_TRANSMISSION);
         unVarnishTransmissionAppSplitConfig.setAllowIpPortList(IpPortConfig.getUnVarnishTransmissionAllowedIpPortList());
         unVarnishTransmissionAppSplitConfig.setForbiddenIpPortList(IpPortConfig.getUnVarnishTransmissionForbiddenIpPortList());
-        unVarnishTransmissionAppSplitConfig.setTspNameList(TSPNameConfig.getUnVarnishTransmissionTspNameList());
+        unVarnishTransmissionAppSplitConfig.setAllowTspNameList(TSPNameConfig.getUnVarnishAllowTransmissionTspNameList());
+        unVarnishTransmissionAppSplitConfig.setForbiddenTspNameList(TSPNameConfig.getUnVarnishTransmissionForbiddenTspNameList());
         //接口透传服务的恢复性配置 设置
         unVarnishTransmissionRecoverAppSplitConfig.setServiceType(ServiceType.VARNISH_TRANSMISSION);
         unVarnishTransmissionRecoverAppSplitConfig.setAllowIpPortList(IpPortConfig.getAllIpPortList());
         unVarnishTransmissionRecoverAppSplitConfig.setForbiddenIpPortList(null);
-        unVarnishTransmissionRecoverAppSplitConfig.setTspNameList(TSPNameConfig.getUnVarnishTransmissionTspNameList());
+        unVarnishTransmissionRecoverAppSplitConfig.setAllowTspNameList(TSPNameConfig.getUnVarnishAllowTransmissionTspNameList());
 
         //所有服务的恢复性配置 设置
         allServiceRecoverAppSplitConfig.setServiceType(ServiceType.ALL_SERVICE);
         allServiceRecoverAppSplitConfig.setAllowIpPortList(IpPortConfig.getAllIpPortList());
         allServiceRecoverAppSplitConfig.setForbiddenIpPortList(null);
-        allServiceRecoverAppSplitConfig.setTspNameList(TSPNameConfig.getAllServiceTspNameList());
+        allServiceRecoverAppSplitConfig.setAllowTspNameList(TSPNameConfig.getAllServiceTspNameList());
     }
 
     public static AppSplitConfigVo getPriceAppSplitConfig() {

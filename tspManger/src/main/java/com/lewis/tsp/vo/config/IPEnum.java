@@ -24,4 +24,11 @@ public enum IPEnum {
     public List<String> getIpPortList() {
         return ipPortList;
     }
+
+    @Override
+    public String toString() {
+        return "IPEnum{" +
+                "ipPortList=" + ipPortList +
+                '}';
+    }
 }

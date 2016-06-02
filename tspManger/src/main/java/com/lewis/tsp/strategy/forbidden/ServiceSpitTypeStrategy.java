@@ -24,7 +24,6 @@ public class ServiceSpitTypeStrategy implements PermitForbiddenStrtegy {
                 OperationTspService.forbiddenTspService(ServiceConfig.getProductAppSplitConfig());
             }else if (serviceType == ServiceType.RESOURCE) {
                 OperationTspService.forbiddenTspService(ServiceConfig.getResourceAppSplitConfig());
-
             }else if (serviceType == ServiceType.VARNISH_TRANSMISSION) {
                 OperationTspService.forbiddenTspService(ServiceConfig.getUnVarnishTransmissionAppSplitConfig());
             }

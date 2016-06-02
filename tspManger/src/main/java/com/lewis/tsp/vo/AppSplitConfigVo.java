@@ -11,7 +11,9 @@ public class AppSplitConfigVo {
     //禁止的服务列表
     private List<String> forbiddenIpPortList;
     //服务名称列表
-    private List<String> tspNameList;
+    private List<String> allowTspNameList;
+
+    private List<String> forbiddenTspNameList;
 
     public ServiceType getServiceType() {
         return serviceType;
@@ -29,13 +31,6 @@ public class AppSplitConfigVo {
         this.allowIpPortList = allowIpPortList;
     }
 
-    public List<String> getTspNameList() {
-        return tspNameList;
-    }
-
-    public void setTspNameList(List<String> tspNameList) {
-        this.tspNameList = tspNameList;
-    }
 
     public AppSplitConfigVo() {
     }
@@ -48,22 +43,39 @@ public class AppSplitConfigVo {
         this.forbiddenIpPortList = forbiddenIpPortList;
     }
 
+    public List<String> getAllowTspNameList() {
+        return allowTspNameList;
+    }
+
+    public void setAllowTspNameList(List<String> allowTspNameList) {
+        this.allowTspNameList = allowTspNameList;
+    }
+
+    public List<String> getForbiddenTspNameList() {
+        return forbiddenTspNameList;
+    }
+
+    public void setForbiddenTspNameList(List<String> forbiddenTspNameList) {
+        this.forbiddenTspNameList = forbiddenTspNameList;
+    }
+
     @Override
     public String toString() {
-        return "AppSplitConfig{" +
+        return "AppSplitConfigVo{" +
                 "serviceType=" + serviceType +
                 ", allowIpPortList=" + allowIpPortList +
                 ", forbiddenIpPortList=" + forbiddenIpPortList +
-                ", tspNameList=" + tspNameList +
+                ", allowTspNameList=" + allowTspNameList +
+                ", forbiddenTspNameList=" + forbiddenTspNameList +
                 '}';
     }
 
-    public AppSplitConfigVo(ServiceType serviceType, List<String> allowIpPortList, List<String> forbiddenIpPortList, List<String> tspNameList) {
+    public AppSplitConfigVo(ServiceType serviceType, List<String> allowIpPortList, List<String> forbiddenIpPortList, List<String> allowTspNameList, List<String> forbiddenTspNameList) {
         this.serviceType = serviceType;
         this.allowIpPortList = allowIpPortList;
         this.forbiddenIpPortList = forbiddenIpPortList;
-        this.tspNameList = tspNameList;
+        this.allowTspNameList = allowTspNameList;
+        this.forbiddenTspNameList = forbiddenTspNameList;
     }
-
 
 }

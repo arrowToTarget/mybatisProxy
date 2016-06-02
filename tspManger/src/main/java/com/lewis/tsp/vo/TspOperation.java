@@ -12,10 +12,6 @@ public enum TspOperation {
         return operCode;
     }
 
-    public void setOperCode(int operCode) {
-        this.operCode = operCode;
-    }
-
     TspOperation(int operCode) {
         this.operCode = operCode;
     }

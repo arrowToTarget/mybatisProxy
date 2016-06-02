@@ -95,7 +95,7 @@ public class IpPortConfig {
     public static final List<String> ipPortAt96List = new LinkedList<String>();
     public static final List<String> ipPortAt209List = new LinkedList<String>();
 
-
+    public static final Map<String,IPEnum> ip2IPEnumMap = new HashMap<String, IPEnum>();
 
     public static final List<String> priceAllowedIpList = Arrays.asList(IP_62,IP_63,IP_64);
 
@@ -165,6 +165,15 @@ public class IpPortConfig {
         tmpAllIpPortList.removeAll(unVarnishTransmissionAllowedIpPortList);
         unVarnishTransmissionForbiddenIpPortList.addAll(tmpAllIpPortList);
 
+
+
+        ip2IPEnumMap.put("62",IPEnum.IP_62);
+        ip2IPEnumMap.put("63",IPEnum.IP_63);
+        ip2IPEnumMap.put("64",IPEnum.IP_64);
+        ip2IPEnumMap.put("40",IPEnum.IP_40);
+        ip2IPEnumMap.put("46",IPEnum.IP_46);
+        ip2IPEnumMap.put("96",IPEnum.IP_96);
+        ip2IPEnumMap.put("209",IPEnum.IP_209);
 
     }
 
@@ -523,6 +532,7 @@ public class IpPortConfig {
     public static String getIpPort20907() {
         return IP_PORT_209_07;
     }
+
 
     public static void main(String[] args) {
         System.out.println(JSON.toJSONString(allIpPortList));
