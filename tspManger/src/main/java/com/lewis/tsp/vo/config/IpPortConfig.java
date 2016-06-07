@@ -533,6 +533,9 @@ public class IpPortConfig {
         return IP_PORT_209_07;
     }
 
+    public static Map<String, IPEnum> getIp2IPEnumMap() {
+        return ip2IPEnumMap;
+    }
 
     public static void main(String[] args) {
         System.out.println(JSON.toJSONString(allIpPortList));

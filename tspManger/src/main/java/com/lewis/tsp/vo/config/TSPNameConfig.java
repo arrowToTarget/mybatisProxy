@@ -2,6 +2,7 @@ package com.lewis.tsp.vo.config;
 
 import com.lewis.tsp.util.CommonUtil;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -69,6 +70,16 @@ public class TSPNameConfig {
             "BOH.NM.ProductController.baokuanProductRes","BOH.NM.ProductController.baokuanProductUpgrade",
             "BOH.NM.FlightTicketChannelController.queryStartPrice","BOH.NM.NgResourceController.queryFlightIndivInt");
 
+
+    public static final List<String> testTspNameList
+            = Arrays.asList("BOH.NM.ProductController.baokuanProduct","BOH.NM.FlightTicketChannelController.flightIndivPreferential",
+            "BOH.NM.HotelChannelController.queryInternationalHotelBookingInfo","BOH.NM.ProductController.getCombinationCalendar",
+            "BOH.NM.HotelChannelController.queryConfigLowerPrice");
+
+    public static final String testPriceTspName="BOH.NM.ProductController.getPriceCalendar";
+    public static final String testProductTspName="BOH.NM.ProductController.getDetail";
+    public static final String testResourceTspName="BOH.NM.NgResourceController.getByResIds";
+    public static final String testUnvarnishTransmissionTspName="BOH.NM.FlightTicketChannelController.queryFlightIndivPriceCalendar";
     public static final List<String> allServiceTspNameList = new LinkedList<String>();
 
     public static final List<String> priceForbiddenTspNameList = new LinkedList<String>();
@@ -138,4 +149,22 @@ public class TSPNameConfig {
     public static List<String> getUnVarnishTransmissionForbiddenTspNameList() {
         return unVarnishTransmissionForbiddenTspNameList;
     }
+
+    public static String getTestPriceTspName() {
+        return testPriceTspName;
+    }
+
+    public static String getTestProductTspName() {
+        return testProductTspName;
+    }
+
+    public static String getTestResourceTspName() {
+        return testResourceTspName;
+    }
+
+    public static String getTestUnvarnishTransmissionTspName() {
+        return testUnvarnishTransmissionTspName;
+    }
+
+
 }

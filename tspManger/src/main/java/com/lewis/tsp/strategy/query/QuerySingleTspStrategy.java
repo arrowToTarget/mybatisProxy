@@ -1,5 +1,6 @@
 package com.lewis.tsp.strategy.query;
 
+import com.alibaba.fastjson.JSON;
 import com.lewis.tsp.tspManger.TSPManager;
 import com.lewis.tsp.vo.QueryResultVo;
 import org.apache.commons.lang3.StringUtils;
@@ -21,5 +22,10 @@ public class QuerySingleTspStrategy {
             return queryResultVo;
         }
         return null;
+    }
+
+    public static void main(String[] args) {
+        QueryResultVo queryResultVo = querySingleTsp("BOH.NM.NgResourceController.getByResIds");
+        System.out.println(JSON.toJSONString(queryResultVo));
     }
 }

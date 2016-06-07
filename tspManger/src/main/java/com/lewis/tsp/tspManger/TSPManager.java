@@ -36,7 +36,7 @@ public final class TSPManager {
         GetTSPIPRequestVo requestVo = new GetTSPIPRequestVo(tspName);
         try {
             HttpClient httpClient = new HttpClient();
-            String url = Constants.URL_GET_TSP_IP_LIST+"?"+ Base64Util.encode(JSON.toJSONString(requestVo));
+            String url = Base64Util.decode(Constants.URL_GET_TSP_IP_LIST)+"?"+ Base64Util.encode(JSON.toJSONString(requestVo));
             HttpMethod httpMethod = new GetMethod(url);
             httpMethod.releaseConnection();
             httpClient.executeMethod(httpMethod);
@@ -87,7 +87,7 @@ public final class TSPManager {
         requsetVo.setForbidOper(tspOperation.getOperCode());
         String param = JSON.toJSONString(requsetVo);
         System.out.println(param);
-        HttpPost req = new HttpPost(Constants.URL_POST_FORBIDDEN);
+        HttpPost req = new HttpPost(Base64Util.decode(Constants.URL_POST_FORBIDDEN));
         req.setEntity(new StringEntity(Base64Util.encode(param)));
         CloseableHttpResponse response = httpClient.execute(req);
         ResponseHandler<String> responseHandler = new BasicResponseHandler();
@@ -112,7 +112,7 @@ public final class TSPManager {
             list.add(new BatchTspOperationRequestVo.TspName2ProviderAddress(tspName,ipPort));
         }
         requestVo.setProviderList(list);
-        HttpPost req = new HttpPost(Constants.URL_POST_FORBIDDEN_BATCH);
+        HttpPost req = new HttpPost(Base64Util.decode(Constants.URL_POST_FORBIDDEN_BATCH));
         req.setEntity(new StringEntity(Base64Util.encode(JSON.toJSONString(requestVo))));
         CloseableHttpResponse response = httpClient.execute(req);
         ResponseHandler<String> responseHandler = new BasicResponseHandler();
@@ -139,7 +139,7 @@ public final class TSPManager {
             }
         }
         requestVo.setProviderList(list);
-        HttpPost req = new HttpPost(Constants.URL_POST_FORBIDDEN_BATCH);
+        HttpPost req = new HttpPost(Base64Util.decode(Constants.URL_POST_FORBIDDEN_BATCH));
         req.setEntity(new StringEntity(Base64Util.encode(JSON.toJSONString(requestVo))));
         CloseableHttpResponse response = httpClient.execute(req);
         ResponseHandler<String> responseHandler = new BasicResponseHandler();

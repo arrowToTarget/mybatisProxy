@@ -1,5 +1,6 @@
 package com.lewis.tsp.vo;
 
+import com.lewis.tsp.util.Base64Util;
 import com.lewis.tsp.vo.config.IPEnum;
 
 import java.util.HashMap;
@@ -28,17 +29,18 @@ public final class Constants {
     public static final String UNVARNISH_TRANSIMISSION_IP ="unvarnish_transmission_ip";
     public static final String RESOURCE_IP ="resource_ip";
 
-    public static final Map<ServiceTypeEnum,List<IPEnum>> serviceType2IpMap = new HashMap<ServiceTypeEnum, List<IPEnum>>();
+    public static final Map<String,ServiceTypeEnum> name2ServiceTypeEnumMap = new HashMap<String, ServiceTypeEnum>();
 
+    public static final String  configPath ="D:/java/sourceCode/mybatisProxy/tspManger/src/config.properties";
 
     //查询TSP服务的地址列表信息的URL
-    public static final String URL_GET_TSP_IP_LIST ="http://public-api.bj.pla.tuniu.org/tsg/register/service/address/query";
+    public static final String URL_GET_TSP_IP_LIST ="aHR0cDovL3B1YmxpYy1hcGkuYmoucGxhLnR1bml1Lm9yZy90c2cvcmVnaXN0ZXIvc2VydmljZS9hZGRyZXNzL3F1ZXJ5";
 
     //禁用、启用TSP服务的URL
-    public static final String URL_POST_FORBIDDEN="http://public-api.bj.pla.tuniu.org/tsg/register/provider/config";
+    public static final String URL_POST_FORBIDDEN="aHR0cDovL3B1YmxpYy1hcGkuYmoucGxhLnR1bml1Lm9yZy90c2cvcmVnaXN0ZXIvcHJvdmlkZXIvY29uZmln";
 
     //批量禁用、启用TSP服务的URL
-    public static final String URL_POST_FORBIDDEN_BATCH ="http://public-api.bj.pla.tuniu.org/tsg/register/provider/batch/config";
+    public static final String URL_POST_FORBIDDEN_BATCH ="aHR0cDovL3B1YmxpYy1hcGkuYmoucGxhLnR1bml1Lm9yZy90c2cvcmVnaXN0ZXIvcHJvdmlkZXIvYmF0Y2gvY29uZmln";
 
 
     public static String getServiceTpyePrice() {
@@ -88,4 +90,20 @@ public final class Constants {
     public static String getResourceIp() {
         return RESOURCE_IP;
     }
+
+    public static String getConfigPath() {
+        return configPath;
+    }
+
+    public static Map<String, ServiceTypeEnum> getName2ServiceTypeEnumMap() {
+        return name2ServiceTypeEnumMap;
+    }
+
+    static {
+        name2ServiceTypeEnumMap.put(Constants.PRICE_IP,ServiceTypeEnum.PRICE);
+        name2ServiceTypeEnumMap.put(Constants.PRODUCT_IP,ServiceTypeEnum.PRODUCT);
+        name2ServiceTypeEnumMap.put(Constants.RESOURCE_IP,ServiceTypeEnum.RESOURCE);
+        name2ServiceTypeEnumMap.put(Constants.UNVARNISH_TRANSIMISSION_IP,ServiceTypeEnum.UNVARNISH_TRANSMISSION);
+    }
+
 }

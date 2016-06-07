@@ -1,8 +1,12 @@
 package com.lewis.tsp.vo.config;
 
 
-import com.lewis.tsp.vo.AppSplitConfigVo;
-import com.lewis.tsp.vo.ServiceType;
+import com.lewis.tsp.util.CommonUtil;
+import com.lewis.tsp.vo.*;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ServiceConfig {
 
@@ -28,6 +32,8 @@ public class ServiceConfig {
 
     //所有服务的恢复性配置，包含 价格服务、产品服务、资源服务、接口透传服务
     public static final AppSplitConfigVo allServiceRecoverAppSplitConfig = new AppSplitConfigVo();
+
+    public static Map<ServiceTypeEnum,List<Node>> serviceTypeEnum2NodeListOfConfig = new HashMap<ServiceTypeEnum, List<Node>>();
 
     static {
         priceAppSplitConfig.setServiceType(ServiceType.PRICE);
@@ -116,5 +122,12 @@ public class ServiceConfig {
 
     public static AppSplitConfigVo getAllServiceRecoverAppSplitConfig() {
         return allServiceRecoverAppSplitConfig;
+    }
+
+    public static Map<ServiceTypeEnum, List<Node>> getServiceTypeEnum2NodeListOfConfig() {
+        if (serviceTypeEnum2NodeListOfConfig == null || serviceTypeEnum2NodeListOfConfig.size() == 0) {
+            serviceTypeEnum2NodeListOfConfig = CommonUtil.getServiceTypeEnumIPEnumAllNodeListAfterAplit(Constants.configPath);
+        }
+        return serviceTypeEnum2NodeListOfConfig;
     }
 }
